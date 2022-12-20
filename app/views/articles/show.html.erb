@@ -1,0 +1,39 @@
+<div style="width:300px">
+  <p>
+  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+  </p>
+  <p>
+  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+  </p>
+  <p>
+  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+  </p>
+  <p style="color: green"><%= notice %></p>
+
+  <%- if @article.previous %>
+    <h1>Previous Article</h1>
+    <%= render @article.previous %>
+
+    <%= turbo_frame_tag :comments, src: article_comments_path(@article.previous) %>
+  <% end %>
+
+  <%= render @article %>
+
+  <%= turbo_frame_tag :comments, src: article_comments_path(@article) %>
+
+  <%- if @article.next %>
+    <h1>next Article</h1>
+    <%= render @article.next %>
+
+    <%- @article.next.comments.each do |comment| %>
+      <%= link_to dom_id(comment), article_path(@article.next, { anchor: dom_id(comment)}) %>
+    <% end %>
+  <% end %>
+
+  <div>
+    <%= link_to "Edit this article", edit_article_path(@article) %> |
+    <%= link_to "Back to articles", articles_path %>
+
+    <%= button_to "Destroy this article", @article, method: :delete %>
+  </div>
+</div>

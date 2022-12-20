@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+
+3.times do
+  Article.create unless Article.exists?
+end
+
+Article.find_each do |article|
+  3.times do
+    article.comments.create if article.comments.empty?
+  end
+end
